@@ -1,0 +1,1 @@
+# 使用 rancher 在 k8s 上部署 yapi

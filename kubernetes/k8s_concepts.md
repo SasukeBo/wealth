@@ -114,6 +114,10 @@ spec:
         - containerPort: 80
 ```
 
+## [命名空间](https://kubernetes.io/zh/docs/concepts/overview/working-with-objects/namespaces/)
+
+Kubernetes 支持多个虚拟集群，它们底层依赖于同一个物理集群。 这些虚拟集群被称为名字空间。
+
 ---
 
 _最后编辑于 2020 年 12 月 15 日 16:33:20_
