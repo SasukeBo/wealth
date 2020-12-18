@@ -164,6 +164,11 @@ sudo docker run -d --restart=unless-stopped --privileged --name rancher -p 30080
 
 恭喜，到这里，该安装的都安装完了。
 
+**Tips**
+
+- 卸载k3s agent `/usr/local/bin/k3s-agent-uninstall.sh`
+- 卸载k3s server `/usr/local/bin/k3s-uninstall.sh`
+
 ---
 
 _最后编辑于 2020 年 12 月 17 日 20:31:01_

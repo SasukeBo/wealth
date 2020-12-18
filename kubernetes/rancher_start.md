@@ -126,6 +126,10 @@ kubectl apply --namespace=your_name_space ./rbac.yaml
 
 这一操作实际上是创建了三个 k8s 对象，分别为`ServiceAccount`、`ClusterRole`和`RoleBinding`。
 
+**Tips**
+
+- [配置k3s内container加速镜像地址](https://blog.csdn.net/PlatoWG/article/details/107811162)
+
 ---
 
 _最后编辑于 2020 年 12 月 17 日 20:31:01_
