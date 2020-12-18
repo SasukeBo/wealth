@@ -119,7 +119,7 @@ CREATE DATABASE k8s_db;
 
 ```shell
 curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server \
-  --datastore-endpoint="mysql://username:password@tcp(hostname:3306)/database-name"
+  --datastore-endpoint="mysql://root:your_root_password@tcp(k8s-master:3306)/k8s_db"
 ```
 
 需要将`datastore-endpoint`中的信息修改为前面部署的 mysql 数据库信息，这里修改为`mysql://root:your_root_password@tcp(k8s-master:3306)/k8s_db`。
@@ -137,7 +137,7 @@ kubectl get nodes
 这里使用的是[官方文档脚本](https://docs.rancher.cn/docs/k3s/quick-start/_index)：
 
 ```shell
-curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetoken sh -
+curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_URL=https://k8s-master:6443 K3S_TOKEN=$node_token sh -
 ```
 
 其中需要替换两个地方：
