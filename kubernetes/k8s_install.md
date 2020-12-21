@@ -132,6 +132,10 @@ kubectl get nodes
 #=> k3s-master   Ready    master   8h    v1.19.5+k3s1
 ```
 
+**注意**
+
+如果你要跨公网部署集群，需要暴露节点的公网 ip，启动时记得加上 `--node-external-ip=<public_ip>`
+
 ### 安装 worker 节点
 
 这里使用的是[官方文档脚本](https://docs.rancher.cn/docs/k3s/quick-start/_index)：
@@ -166,8 +170,8 @@ sudo docker run -d --restart=unless-stopped --privileged --name rancher -p 30080
 
 **Tips**
 
-- 卸载k3s agent `/usr/local/bin/k3s-agent-uninstall.sh`
-- 卸载k3s server `/usr/local/bin/k3s-uninstall.sh`
+- 卸载 k3s agent `/usr/local/bin/k3s-agent-uninstall.sh`
+- 卸载 k3s server `/usr/local/bin/k3s-uninstall.sh`
 
 ---
 

@@ -6,5 +6,6 @@ Kubernetes
 - [使用 Rancher 在 k8s 上部署 kafka](./rancher_deploy_kafka.md)
 - [使用 Rancher 在 k8s 上部署 yapi](./rancher_deploy_yapi.md)
 - [使用 Rancher 在 k8s 上部署 apollo](./rancher_deploy_apollo.md)
+- [K3s 集群节点设置 containerd 镜像加速](./k3s_containerd_registry_mirrors.md)
 
 [返回上一级](../README.md)
