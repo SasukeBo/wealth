@@ -172,6 +172,7 @@ sudo docker run -d --restart=unless-stopped --privileged --name rancher -p 30080
 
 - 卸载 k3s agent `/usr/local/bin/k3s-agent-uninstall.sh`
 - 卸载 k3s server `/usr/local/bin/k3s-uninstall.sh`
+- 通过环境变量指定k3s版本 `export INSTALL_K3S_VERSION=v1.18.8+k3s1`
 
 ---
 
