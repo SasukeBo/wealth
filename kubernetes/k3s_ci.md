@@ -53,6 +53,8 @@ gitlab_rails['gitlab_shell_ssh_port'] = 32222
 5. 对于您想设置流水线的每个代码库，点击启用。
 6. 当您启用所有代码库后，点击完成。
 
+启用流水线代码库的配置文件可以参照[pipeline-example-go](https://github.com/rancher/pipeline-example-go)
+
 [官方文档](https://docs.rancher.cn/docs/rancher2/k8s-in-rancher/pipelines/_index)
 
 ---

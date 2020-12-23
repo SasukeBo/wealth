@@ -1,0 +1,5 @@
+## Select
+
+Go语言中的Select关键字可以让Goroutine同时等待多个Channel的可读或可写状态。
+
+select 可以阻塞当前Goroutine也可以通过default实现非阻塞。
