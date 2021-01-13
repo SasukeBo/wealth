@@ -16,12 +16,15 @@ npm install -g clang-format
 
 - 打开 goland 的 preference，Mac 使用 `cmd+,`.
 - `Tools` -> `File Watchers`
+
   ![tools_file_watchers](imgs/tools_file_watchers.png)
 
 - 点击`+`来添加一个 watcher，选择 `custom`
+
   ![choose_template](imgs/choose_template.png)
 
 - 填写配置
+
   ![config](imgs/config.png)
 
   - 将文件类型选择为`Protocol Buffer`。
@@ -38,4 +41,10 @@ npm install -g clang-format
 
 ## 最后
 
-配置完成后，保存proto文件会触发自动格式化。
+配置完成后，保存 proto 文件会触发自动格式化。
+
+---
+
+_最后编辑于 2020 年 12 月 15 日 16:34:41_
+
+[返回目录](./menu.md)
