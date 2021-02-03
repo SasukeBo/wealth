@@ -8,3 +8,4 @@
 - [Kubernetes](./kubernetes/menu.md)
 - [Go Micro](./go-micro/menu.md)
 - [Goland](./goland/menu.md)
+- [Gitlab](./gitlab/menu.md)
