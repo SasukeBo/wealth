@@ -10,3 +10,4 @@
 - [Goland](./goland/menu.md)
 - [Gitlab](./gitlab/menu.md)
 - [ELK](./elk/menu.md)
+- [MongoDB](./mongodb/menu.md)

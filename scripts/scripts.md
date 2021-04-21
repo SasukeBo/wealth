@@ -21,5 +21,14 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # docker
 docker rmi `docker images | grep dk.uino.cn/thingyouwe/ | awk '{print $3}'`
 # k3s crictl
-k3s crictl rmi `k3s crictl images | grep docker.udolphin.com | awk '{print $3}'`
+k3s crictl rmi `k3s crictl images | grep dk.uino.cn/thingyouwe | awk '{print $3}'`
+```
+
+- docker 运行mongodb
+
+```sh
+docker run -d --name mongodb -p 27017:27017  \
+  -e MONGO_INITDB_ROOT_USERNAME=sasukebo \
+  -e MONGO_INITDB_ROOT_PASSWORD=123456 \
+  mongo
 ```
