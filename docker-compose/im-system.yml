@@ -1,0 +1,116 @@
+version: '3'
+services:
+  nats:
+    image: nats
+    restart: always
+    networks:
+      - im-system
+
+  etcd:
+    image: bitnami/etcd:latest
+    restart: always
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-server:2379
+    networks:
+      - im-system
+
+  redis:
+    image: redis
+    restart: always
+    networks:
+      - im-system
+
+  uuid-srv:
+    image: golang:1.16
+    restart: always
+    depends_on:
+      - redis
+      - etcd
+    environment:
+      - APOLLO_IP=apollo.api.thingyouwe.com
+      - APOLLO_ENV=thingyouwe_local
+      - APOLLO_APPID=uuid-srv
+      - registry=etcd
+    volumes:
+      - '${PROJECT_PATH}/uuid-srv/main:/app'
+    entrypoint: ['/app']
+    networks:
+      - im-system
+
+  user-srv:
+    image: golang:1.16
+    restart: always
+    depends_on:
+      - etcd
+      - nats
+    environment:
+      - APOLLO_IP=apollo.api.thingyouwe.com
+      - APOLLO_ENV=thingyouwe_local
+      - APOLLO_APPID=user_v2-center-srv
+      - registry=etcd
+    volumes:
+      - '${PROJECT_PATH}/user_v2-center-srv/main:/app'
+    entrypoint: ['/app']
+    networks:
+      - im-system
+
+  im-store-srv:
+    image: golang:1.16
+    restart: always
+    depends_on:
+      - redis
+      - etcd
+      - nats
+    environment:
+      - APOLLO_IP=apollo.api.thingyouwe.com
+      - APOLLO_ENV=thingyouwe_local
+      - APOLLO_APPID=im-store-srv
+      - registry=etcd
+    volumes:
+      - '${PROJECT_PATH}/im-store-srv/main:/app'
+    entrypoint: ['/app']
+    networks:
+      - im-system
+
+  message-srv:
+    image: golang:1.16
+    restart: always
+    ports:
+      - '${HTTP_PORT}:80'
+    depends_on:
+      - etcd
+      - nats
+    environment:
+      - APOLLO_IP=apollo.api.thingyouwe.com
+      - APOLLO_ENV=thingyouwe_local
+      - APOLLO_APPID=message-srv
+      - registry=etcd
+    volumes:
+      - '${PROJECT_PATH}/message-srv/main:/app'
+    entrypoint: ['/app']
+    networks:
+      - im-system
+
+  ws-srv:
+    image: golang:1.16
+    restart: always
+    ports:
+      - '${WS_PORT}:443'
+    depends_on:
+      - etcd
+      - nats
+    environment:
+      - APOLLO_IP=apollo.api.thingyouwe.com
+      - APOLLO_ENV=thingyouwe_local
+      - APOLLO_APPID=ws-srv
+      - registry=etcd
+    volumes:
+      - '${PROJECT_PATH}/ws-srv/main:/app'
+    entrypoint: ['/app']
+    networks:
+      - im-system
+
+networks:
+  im-system:
+# PG_PORT=54322 PROJECT_PATH=$PWD HTTP_PORT=8081 WS_PORT=8082 docker-compose up

@@ -1,0 +1,9 @@
+click_admins:
+  run_as: [ 'test_user' ]
+  cluster: [ 'monitor' ]
+  indices:
+    - names: [ 'thing-*' ]
+      privileges: [ 'read' ]
+      field_security:
+        grant: ['category', '@timestamp', 'message' ]
+      query: '{"match": {"category": "click"}}'
