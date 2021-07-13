@@ -87,12 +87,14 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: micro-services
+  namespace: YOUR_NAMESAPCE
 ---
 # 创建角色
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: micro-registry
+  namespace: YOUR_NAMESAPCE
 rules:
   - apiGroups:
       - ''
@@ -108,6 +110,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: micro-registry
+  namespace: YOUR_NAMESAPCE
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -115,7 +118,6 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: micro-services
-    namespace: default
 ```
 
 你可以通过在 rancher 的工作负载中导入 yaml，导入模式为项目，选中正确的命名空间，也可以通过在 master 节点宿主机上执行下面命令：
