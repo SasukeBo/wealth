@@ -36,8 +36,9 @@ docker run -d --name mongodb -p 27017:27017  \
 - docker 运行 postgresql
 
 ```sh
-docker run -d \
+sudo docker run -d \
 --name postgres \
+--restart always \
 -p 5432:5432 \
 -e POSTGRES_PASSWORD=123456 \
 -e PGDATA=/var/lib/postgresql/data/pgdata \

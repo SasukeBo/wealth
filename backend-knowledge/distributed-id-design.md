@@ -14,52 +14,43 @@
   100020129954
   100002982786
 
-## 方案
+redis key id-srv-pod-1 005
 
-目标 ID 样式：长度 12 位，纯数字
+rpc get id
+random step =5
+ 100000 *1000 + 005 = id
+random step = 9
 
-### 实现原理
-
-时间戳，号段，redis 单线程原子自增特性
-
-- 时间戳
-
-标准 timestamp 长度为 13 位，如果用来作为 ID 的一部分则过长。
-
-```js
-new Date('2021-06-11T00:00:00Z').getTime()
-// => 1623369600000
-```
-
-加入 timestamp 的目的也是为了保证一定时间范围内的唯一性，但我们不需要这么长的时间戳，可以通过和森友会上线日期做差值来取得时间的唯一性，或者是杭州森友会成立日期等。
-
-- 号段
-
-考虑到时间戳的连续性
-
-```golang
-package main
-
-import (
-	"fmt"
-	"time"
-)
-
-func main() {
-	t := time.Date(2021, time.June, 1, 0, 0, 0, 0, time.UTC)  // 上线日 2021-07-01
-	t2 := time.Date(2121, time.June, 1, 0, 0, 0, 0, time.UTC) // 一百年后
-	t3 := time.Date(3021, time.June, 1, 0, 0, 0, 0, time.UTC) // 一千年后
-	now := time.Now()
-	timeStamp := now.Sub(t)
-	timeStamp2 := t2.Sub(t)
-	timeStamp3 := t3.Sub(t)
-	fmt.Println(int64(timeStamp / time.Hour)) // 699
-	fmt.Println(int64(timeStamp2 / time.Hour)) // 876576
-	fmt.Println(int64(timeStamp3 / time.Hour)) // 2562047
+if key > 999 {
+	db get id range
 }
-```
 
-从上面可以看到，即时是一千年以后的时间戳，其长度也仅需要 7 位，
+	id-srv pod 1   100003 000 random 1-10 
+	id-srv pod 2	 100005 000
+	id-srv pod 3   100004 0000
+
+
+	id 表
+
+	- id auto_increcement
+	- 时间
+
+	[1,3,5,6, 19,23,100,150] 0 单调递增 但是不连续
+
+	id 转换 打乱顺序
+
+	1 9 8 0 7 9 0 7 8 5 7
+	9 0 9 7 5
+
+ip 一段时间内  404
+
+dao.GetProduct
+
+id 1000000001
+
+db.middleware
+
+- 打乱可恢复 且唯一
 
 ---
 

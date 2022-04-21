@@ -108,15 +108,24 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.14.2
-        ports:
-        - containerPort: 80
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
 ```
 
 ## [命名空间](https://kubernetes.io/zh/docs/concepts/overview/working-with-objects/namespaces/)
 
 Kubernetes 支持多个虚拟集群，它们底层依赖于同一个物理集群。 这些虚拟集群被称为名字空间。
+
+## Kubernetes 的基本概念和术语
+
+几乎所有资源对象都可以通过 Kubectl 工具或者 API 进行 CURD 并持久化在 etcd 中。跟踪对比 etcd 中记录的期望值与实际资源状态的差异，实现自动控制和自动纠错的高级功能。
+
+我们可以用 yaml 或者 json 定义一个资源对象，每种对象有自己的特定语法格式，可以理解为数据库中一个特定的表。
+
+Annotations 是为了实现新版本迭代增加的新属性，由于增加新属性需要有对应的数据库表字段存储，如果直接修改表结构添加字段，改动范围比较大，风险更大，会造成旧版本配置失效等问题。
+所以，采用备注的方式来存储新特性（属性），待新特性稳定成熟之后可以修改表结构，发布到正式版本，这就是通用字段 Annotations 的作用。
 
 ---
 
