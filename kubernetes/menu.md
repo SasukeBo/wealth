@@ -13,5 +13,6 @@ Kubernetes
 - [K3s 集群维护笔记](./k3s_operation_notes.md)
 - [k8s 安装使用](./k8s_install/menu.md)
 - [Docker 安装 Rancher 配置证书](./install_docker_rancher_with_self_certs.md)
+- [k3s 证书轮换](./rotate_certs_for_k3s.md)
 
 [返回上一级](../README.md)

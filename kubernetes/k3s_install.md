@@ -122,6 +122,8 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
   --datastore-endpoint="mysql://root:your_root_password@tcp(k8s-master:3306)/k8s_db"
 ```
 
+可以通过环境变量`INSTALL_K3S_VERSION`指定版本号。
+
 需要将`datastore-endpoint`中的信息修改为前面部署的 mysql 数据库信息，这里修改为`mysql://root:your_root_password@tcp(k8s-master:3306)/k8s_db`。
 
 通过执行下面到命令来检查是否部署成功：
