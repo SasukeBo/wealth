@@ -57,3 +57,27 @@ chroot 命令可以轻松为容器进程更改根目录，Mount Namespace 正是
 rootfs 只包含了操作系统的躯壳，而其灵魂“内核”则是与宿主机共享内核，所以对于所有容器而言，宿主机内核参数是全局变量，牵一发而动全身。
 
 docker 打包了 rootfs，从而保证了一致性，local 和 PaaS 只需要保证内核一致，就可以做到一致性。
+
+现如今 docker 一般使用 overlayfs 来实现增量 rootfs 联合挂载的能力。
+
+- Overlayfs 是一种类似 aufs 的一种堆叠文件系统
+
+## 重新认识 Docker 容器
+
+Linux Namespace 虽然是一个看不见摸不着的概念，但是容器进程运行时的 Namespace 配置在宿主机上却可以找得到。
+
+```sh
+docker run --rm --name helloworld helloworld
+docker inspect --format '{{ .State.Pid }}' helloworld
+#=> pid=25686
+
+sudo ls -l /proc/25686/ns
+#=>
+# lrwxrwxrwx 1 root root 0 Aug  5 09:33 net -> 'net:[4026533082]'
+# ...
+```
+
+能够看到指定容器的网络命名空间。linux 操作系统上一切皆是文件，知道这个文件就可以加入到这个 Namespace 中。
+这也是`docker exec`实现前提。
+
+
