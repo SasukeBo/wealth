@@ -35,6 +35,18 @@ case "$1" in
   args[-1]="-l ${me}"
   args+=("$image")
 
+  netIndex=0
+  for i in "${!args[@]}"; do
+    if [ "${args[$i]}" == "-n" ]; then
+      netIndex=$i
+      break
+    fi
+  done
+
+  if [ $netIndex != 0 ]; then
+    args[$netIndex]="--network ${me}"
+  fi
+
   ;;
 
 "ps")
