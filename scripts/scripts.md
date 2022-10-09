@@ -46,23 +46,16 @@ sudo docker run -d \
 postgres
 ```
 
-- docker 运行 nats
+分配只读权限
 
-```sh
-docker run -d \
-  --name nats-main \
-  --network thingyouwe-local \
-  -p 4222:4222 \
-  -p 6222:6222 \
-  -p 8222:8222 \
-  nats
+```sql
+GRANT select ON all tables in schema public TO db_role1;
 ```
 
 - docker 运行 etcd-server
 
 ```sh
 docker run -d --name etcd-server \
-    --network thingyouwe-local \
     --publish 2379:2379 \
     --publish 2380:2380 \
     --env ALLOW_NONE_AUTHENTICATION=yes \
@@ -78,4 +71,29 @@ docker run -d \
   --network thingyouwe-local \
   -p 6379:6379 \
   redis
+```
+
+### nats
+
+- 运行普通 nats
+
+```sh
+docker run -d \
+  --name nats-main \
+  -p 4222:4222 \
+  -p 6222:6222 \
+  -p 8222:8222 \
+  nats
+```
+
+- 运行 JetStream
+
+```sh
+docker run -d \
+  --name JetStream \
+  -v $PWD/jet-stream.conf:/etc/nats/jet-stream.conf \
+  -p 4222:4222 \
+  -p 6222:6222 \
+  -p 8222:8222 \
+  nats -c /etc/nats/jet-stream.conf
 ```
