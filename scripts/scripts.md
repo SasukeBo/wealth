@@ -97,3 +97,10 @@ docker run -d \
   -p 8222:8222 \
   nats -c /etc/nats/jet-stream.conf
 ```
+
+### rdf4j
+
+```sh
+docker run -d -p 8080:8080 -e JAVA_OPTS="-Xms1g -Xmx4g" --name rdf4j_learn \
+	-v data:/var/rdf4j -v logs:/usr/local/tomcat/logs eclipse/rdf4j-workbench:latest testing
+```
