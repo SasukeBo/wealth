@@ -4,7 +4,7 @@
 
 在自己的电脑下执行以下命令
 
-```shell script
+```bash script
 git config --global url."https://thingyouwe:Ru_-fP6fBBUCov-b4Nwa@git.uinnova.com/".insteadOf "https://git.uinnova.com/"
 go env -w GO111MODULE="on"
 go env -w GOPRIVATE="git.uinnova.com/thingyouwe"
@@ -18,25 +18,25 @@ go env -w GOPROXY="https://goproxy.cn,direct"
 
 - Protoc
 
-```shell script
+```bash script
 brew install protobuf
 ```
 
 - 安装 protoc-gen-go
 
-```shell script
+```bash script
 go get -u github.com/golang/protobuf/protoc-gen-go@v1.3.4
 ```
 
 - 安装 protoc-gen-micro 插件
 
-```shell script
+```bash script
 go get git.uinnova.com/thingyouwe-middleware/micro/cmd/protoc-gen-micro
 ```
 
 - 检查安装状况
 
-```shell script
+```bash script
 cd $GOPATH/bin
 ls | grep protoc
 # =>

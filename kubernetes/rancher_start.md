@@ -122,7 +122,7 @@ subjects:
 
 你可以通过在 rancher 的工作负载中导入 yaml，导入模式为项目，选中正确的命名空间，也可以通过在 master 节点宿主机上执行下面命令：
 
-```shell
+```bash
 kubectl apply --namespace=your_name_space ./rbac.yaml
 ```
 

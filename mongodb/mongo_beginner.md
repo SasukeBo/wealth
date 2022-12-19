@@ -88,7 +88,7 @@ mongo --host localhost \
 
 - 选择自己的数据库
 
-```shell
+```bash
 # 在 mongo shell 中执行 db 来查看当前连接的数据库
 db
 #=> test

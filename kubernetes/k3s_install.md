@@ -14,13 +14,13 @@ k3s —— 史上最轻量级 Kubernetes，易于安装，只需 512MB RAM 即�
 
 通过执行下面的指令将服务器 hostname 设置为 k8s-master：
 
-```shell
+```bash
 hostnamectl set-hostname k8s-master
 ```
 
 你可以通过执行下面的指令检查是否设置成功
 
-```shell
+```bash
 hostname
 #=> k8s-master
 ```
@@ -32,7 +32,7 @@ hostname
 
 为了方便在内网直接识别各服务器，可以在 hosts 文件中添加映射：
 
-```shell
+```bash
 cat <<EOF >>/etc/hosts
 172.17.0.12 k8s-master
 172.10.0.15 k8s-worker-1
@@ -46,7 +46,7 @@ EOF
 
 执行如下所有指令来配置防火墙：
 
-```shell
+```bash
 systemctl stop firewalld
 systemctl disable firewalld
 setenforce 0
@@ -59,7 +59,7 @@ sed -i 's/.*swap.*/#&/' /etc/fstab
 
 将桥接的 IPv4 流量传递到 iptables 的链：
 
-```shell
+```bash
 cat > /etc/sysctl.d/k8s.conf <<EOF
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
@@ -74,7 +74,7 @@ sysctl --system
 
 如果你是 centos 环境，可以通过 yum 直接安装
 
-```shell
+```bash
 yum install docker
 ```
 
@@ -82,7 +82,7 @@ yum install docker
 
 2. 使用 docker 部署 mysql
 
-```shell
+```bash
 docker run -p 3306:3306 --name mysql \
 -v /home/mysql/conf:/etc/mysql \
 -v /home/mysql/logs:/var/log/mysql \
@@ -97,13 +97,13 @@ docker run -p 3306:3306 --name mysql \
 
 首先需要进入 mysql 容器环境：
 
-```shell
+```bash
 docker exec -it mysql /bin/bash
 ```
 
 然后使用`mysql`命令行客户端连接数据库：
 
-```shell
+```bash
 mysql -u root -p
 ```
 
@@ -117,7 +117,7 @@ CREATE DATABASE k8s_db;
 
 这里使用的是[官方文档脚本](https://docs.rancher.cn/docs/k3s/quick-start/_index)：
 
-```shell
+```bash
 curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server \
   --datastore-endpoint="mysql://root:your_root_password@tcp(k8s-master:3306)/k8s_db"
 ```
@@ -128,7 +128,7 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 
 通过执行下面到命令来检查是否部署成功：
 
-```shell
+```bash
 kubectl get nodes
 #=> NAME         STATUS   ROLES    AGE   VERSION
 #=> k3s-master   Ready    master   8h    v1.19.5+k3s1
@@ -142,7 +142,7 @@ kubectl get nodes
 
 这里使用的是[官方文档脚本](https://docs.rancher.cn/docs/k3s/quick-start/_index)：
 
-```shell
+```bash
 curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_URL=https://k8s-master:6443 K3S_TOKEN=$node_token sh -
 ```
 
@@ -151,7 +151,7 @@ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_M
 - `K3S_URL`，该参数指定了 master 节点服务的位置，这里修改为`https://k8s-master:6443`
 - `K3S_TOKEN`，该参数需要指定 master 节点的 node_token，其文件存储路径为`/var/lib/rancher/k3s/server/node-token`
 
-```shell
+```bash
 cat /var/lib/rancher/k3s/server/node-token
 #=> K10c00f954cf3b229eadc05c942f55fa962893bdcc4ab48faa023f54424276e10e0::server:91d449553527b80bde9e5b9deb187db4
 ```
@@ -162,7 +162,7 @@ cat /var/lib/rancher/k3s/server/node-token
 
 rancher 用于可视化管理你的 k8s 集群。
 
-```shell
+```bash
 sudo docker run -d --restart=unless-stopped --privileged --name rancher -p 30080:80 -p 30443:443 rancher/rancher
 ```
 

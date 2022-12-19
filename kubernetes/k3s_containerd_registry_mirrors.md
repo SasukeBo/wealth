@@ -2,7 +2,7 @@
 
 - 创建配置文件模板
 
-```shell
+```bash
 cp /var/lib/rancher/k3s/agent/etc/containerd/config.toml /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
 ```
 
@@ -21,7 +21,7 @@ cp /var/lib/rancher/k3s/agent/etc/containerd/config.toml /var/lib/rancher/k3s/ag
 
 - 重启 k3s 使配置生效
 
-```shell script
+```bash script
 # 如果是master节点主机，重启k3s服务
 systemctl restart k3s
 
@@ -31,7 +31,7 @@ systemctl restart k3s-agent
 
 - 检查配置是否生效
 
-```shell script
+```bash script
 crictl info | grep -A 5 registry
 ```
 

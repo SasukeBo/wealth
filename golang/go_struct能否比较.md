@@ -4,7 +4,7 @@
 
 不可比较的成员包括 Slice、Map 和 Function
 
-```golang
+```go
 type T struct {
 	Name  string
 	Age   int
@@ -18,7 +18,7 @@ func main() {
 }
 ```
 
-```golang
+```go
 type T struct {
 	Name  string
 	Age   int

@@ -1,6 +1,6 @@
 # Defer执行流程
 
-```golang
+```go
 func main() {
   defer func() {
     recover()

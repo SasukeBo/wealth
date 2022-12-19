@@ -24,7 +24,7 @@ curl "https://118.31.172.31:6443/apis/apps/v1/namespaces/thingyouwe-${CI_COMMIT_
 
 我们分析一下 client-go 项目中的例子：
 
-```golang
+```go
 // in examples/out-of-cluster-client-configuration/main.go
 
 var kubeconfig *string
